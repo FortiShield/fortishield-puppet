@@ -1,0 +1,14 @@
+node /^manager/ {
+  class { 'fortishield::manager':}
+}
+node /^agent/ {
+  class { 'fortishield::agent':
+        fortishield_register_endpoint => 'manager_ip',
+        fortishield_reporting_endpoint => 'manager_ip',
+  }
+}
+
+node default {
+  notify { 'This node did not match any of the listed definitions': }
+}
+
